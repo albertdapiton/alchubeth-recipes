@@ -1,0 +1,36 @@
+---
+name: Checks
+
+on: [push]
+
+jobs: 
+  test-lint:
+    name: Test and Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Test
+        env: 
+          DEBUG: ${{ secrets.ENV_DEBUG }}
+          DEV: ${{ secrets.ENV_DEV }}
+          DB_HOST: ${{ secrets.ENV_DB_HOST }}
+          DB_NAME: ${{ secrets.ENV_DB_DB_NAME }}
+          DB_USER: ${{ secrets.ENV_DB_USER }}
+          DB_PASS: ${{ secrets.ENV_DB_PASS }}
+          DJANGO_SECRET_KEY: ${{ secrets.ENV_DJANGO_SECRET_KEY }}
+          DJANGO_ALLOWED_HOSTS: ${{ secrets.ENV_DJANGO_ALLOWED_HOSTS }}
+        run: docker-compose run --rm alchubeth-recipes-app sh -c "python manage.py wait_for_db && python manage.py test"
+      - name: Lint
+        env: 
+          DEBUG: ${{ secrets.ENV_DEBUG }}
+          DEV: ${{ secrets.ENV_DEV }}
+          DB_HOST: ${{ secrets.ENV_DB_HOST }}
+          DB_NAME: ${{ secrets.ENV_DB_DB_NAME }}
+          DB_USER: ${{ secrets.ENV_DB_USER }}
+          DB_PASS: ${{ secrets.ENV_DB_PASS }}
+          DJANGO_SECRET_KEY: ${{ secrets.ENV_DJANGO_SECRET_KEY }}
+          DJANGO_ALLOWED_HOSTS: ${{ secrets.ENV_DJANGO_ALLOWED_HOSTS }}
+        run: docker-compose run --rm alchubeth-recipes-app sh -c "flake8"
