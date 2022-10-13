@@ -20,7 +20,7 @@ jobs:
           DEBUG: ${{ secrets.ENV_DEBUG }}
           DEV: ${{ secrets.ENV_DEV }}
           DB_HOST: ${{ secrets.ENV_DB_HOST }}
-          DB_NAME: ${{ secrets.ENV_DB_DB_NAME }}
+          DB_NAME: ${{ secrets.ENV_DB_NAME }}
           DB_USER: ${{ secrets.ENV_DB_USER }}
           DB_PASS: ${{ secrets.ENV_DB_PASS }}
           DJANGO_SECRET_KEY: ${{ secrets.ENV_DJANGO_SECRET_KEY }}
@@ -31,7 +31,7 @@ jobs:
           DEBUG: ${{ secrets.ENV_DEBUG }}
           DEV: ${{ secrets.ENV_DEV }}
           DB_HOST: ${{ secrets.ENV_DB_HOST }}
-          DB_NAME: ${{ secrets.ENV_DB_DB_NAME }}
+          DB_NAME: ${{ secrets.ENV_DB_NAME }}
           DB_USER: ${{ secrets.ENV_DB_USER }}
           DB_PASS: ${{ secrets.ENV_DB_PASS }}
           DJANGO_SECRET_KEY: ${{ secrets.ENV_DJANGO_SECRET_KEY }}
