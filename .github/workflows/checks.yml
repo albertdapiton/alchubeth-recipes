@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Login to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
+      - name: Create .env file
+        run: cp .env.sample .env
       - name: Checkout
         uses: actions/checkout@v3
       - name: Test
